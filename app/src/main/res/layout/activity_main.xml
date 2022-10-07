@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,68 +10,49 @@
     android:orientation="vertical"
     android:background="@color/white"
     >
-    <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Navegar"
-        android:textSize="32dp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/poppinssemibold"
-        android:textFontWeight="@integer/material_motion_duration_medium_1"
-       />
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/poppinssemibold"
+        android:text="Navegar"
+        android:textColor="@color/black"
+        android:textFontWeight="@integer/material_motion_duration_medium_1"
+        android:textSize="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:tabIndicatorColor="@color/blue"
+        app:tabIndicatorFullWidth="true"
+        app:tabSelectedTextColor="@color/second_black"
+        app:tabTextColor="@color/gray"
         android:orientation="horizontal"
-        android:layout_marginTop="48dp"
-        >
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:background="@drawable/button_background"
-            style="?android:attr/borderlessButtonStyle"
-            android:id="@+id/btn_moods_fragment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppinssemibold"
-            android:text="MOODS"
-            android:textColor="@color/second_black"
-            android:textSize="16dp"
-            android:textAlignment="textStart"
-            />
-        <androidx.appcompat.widget.AppCompatButton
-            android:background="@drawable/button_background"
-            android:id="@+id/btn_music_fragment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="MUSICAS"
-            android:textSize="16dp"
-            android:fontFamily="@font/poppinssemibold"
-            android:textColor="@color/gray"
-            style="?android:attr/borderlessButtonStyle"
-            android:textAlignment="textStart"
-            />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:background="@drawable/button_background"
-            android:id="@+id/btn_playlist_fragment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PLAYLISTS"
-            android:textSize="16dp"
-            android:fontFamily="@font/poppinssemibold"
-            android:textColor="@color/gray"
-            style="?android:attr/borderlessButtonStyle"
-            android:state_pressed="false"
-            android:textAlignment="textStart"
-            />
-
-    </LinearLayout>
-
-    <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        app:tabGravity="start"
+        app:tabPaddingStart="0dp"
+        app:tabPaddingEnd="30dp"
+        android:paddingHorizontal="0dp"
+        app:tabMinWidth="60dp"
         />
 
-  </LinearLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:layout_marginTop="32dp"
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tab_layout"
+        tools:layout_editor_absoluteX="24dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

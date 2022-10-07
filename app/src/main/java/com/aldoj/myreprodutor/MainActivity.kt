@@ -2,47 +2,47 @@ package com.aldoj.myreprodutor
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.ListView
 import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {
+    private  lateinit var fragmentTablayout: TabLayout
+    private  lateinit var fragmentViewPager: ViewPager2
+    private  lateinit var viewPagerAdapter: ViewPagerAdapter
+    private lateinit var arrayAdapter : ArrayAdapter<*>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val moodFragment = MoodFragment()
+        val FragmentsTitle = listOf<String>(
+            "MOODS",
+            "MUSICAS",
+            "PLAYLISTS"
+        )
 
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fragment_container, moodFragment)
-            commit()
-        }
+        val contents = listOf<Fragment>(
+            MoodFragment(),
+            MoodFragment(),
+            MoodFragment(),
+        )
+        fragmentViewPager = findViewById(R.id.viewpager)
+        fragmentTablayout = findViewById(R.id.tab_layout)
+        viewPagerAdapter = ViewPagerAdapter(this, contents)
+
+        fragmentViewPager.adapter = viewPagerAdapter
 
 
-        val btn_moods: Button = findViewById(R.id.btn_moods_fragment)
-        val btn_music: Button = findViewById(R.id.btn_music_fragment)
-        val btn_playlists: Button = findViewById(R.id.btn_playlist_fragment)
+        TabLayoutMediator(fragmentTablayout, fragmentViewPager) { tab, position ->
+            tab.text = FragmentsTitle[position]
+        }.attach()
 
-        btn_moods.setOnClickListener {
-            btn_moods.setTextColor(resources.getColor(R.color.second_black))
-            btn_music.setTextColor(resources.getColor(R.color.gray))
-            btn_playlists.setTextColor(resources.getColor(R.color.gray))
-
-            supportFragmentManager.beginTransaction().apply {
-                replace(R.id.fragment_container, moodFragment)
-                commit()
-            }
-        }
-
-        btn_music.setOnClickListener {
-            btn_music.setTextColor(resources.getColor(R.color.second_black))
-            btn_moods.setTextColor(resources.getColor(R.color.gray))
-            btn_playlists.setTextColor(resources.getColor(R.color.gray))
-        }
-
-        btn_playlists.setOnClickListener {
-            btn_playlists.setTextColor(resources.getColor(R.color.second_black))
-            btn_moods.setTextColor(resources.getColor(R.color.gray))
-            btn_music.setTextColor(resources.getColor(R.color.gray))
-        }
     }
+
+
 }
